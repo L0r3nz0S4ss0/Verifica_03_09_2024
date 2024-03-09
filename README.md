@@ -29,7 +29,3 @@ Questo progetto Java si propone di recuperare i commenti dall'API JSONPlaceholde
 ## Contribuisci
 
 Senti libero di migliorare questo progetto aprendo issue e pull requests!
-
-## Licenza
-
-Questo progetto è rilasciato sotto la licenza [MIT License](LICENSE).
