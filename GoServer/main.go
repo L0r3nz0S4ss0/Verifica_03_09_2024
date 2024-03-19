@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -82,20 +81,13 @@ func getCommentsByDate(c *gin.Context) {
 	c.JSON(http.StatusOK, comments)
 }
 
-// ...
-
 func getCommentsByTime(c *gin.Context) {
 	timeStr := c.Param("time")
-	timeInt, err := strconv.Atoi(timeStr)
+	timeObj, err := time.Parse("15:04:05", timeStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid time format"})
 		return
 	}
-
-	hour := timeInt / 100
-	minute := timeInt % 100
-
-	timeObj := time.Date(0, 1, 1, hour, minute, 0, 0, time.UTC)
 
 	rows, err := db.Query("SELECT * FROM comments WHERE TIME(data_ora) = ?", timeObj.Format("15:04:05"))
 	if err != nil {
